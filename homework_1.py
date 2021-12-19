@@ -19,6 +19,12 @@ class Student:
 
     def add_courses(self, course_name):
         self.finished_course.append(course_name)
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {self.name}\n' \
+              f'Курсы в процессе изучения: {", ".join(self.courses_in_progress)}\nЗавершенные курсы:' \
+              f' {", ".join(self.finished_course)}'
+        return res
+    def average_rating(self, ):
 
 class Mentor:
     def __init__(self, name, surname):
@@ -44,14 +50,21 @@ class Reviewer(Mentor):
 
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+not_best_student = Student('Dima', 'Sillydreamer', 'male')
+not_best_student.courses_in_progress += ['Python', 'Cooking']
+not_best_student.finished_course += ['Git']
 
-cool_reviewer = Reviewer('Some', 'Buddy')
-cool_reviewer.courses_attached += ['Python']
+first_cool_reviewer = Reviewer('Some', 'Buddy')
+second_cool_reviewer = Reviewer('Karapet', 'Popov')
 
-cool_reviewer.rate_hw(best_student, 'Python', 10)
-cool_reviewer.rate_hw(best_student, 'Python', 10)
-cool_reviewer.rate_hw(best_student, 'Python', 10)
+first_lecturer = Lecturer('Petr', 'Pervyi')
+second_lecturer = Lecturer('Nadezhda', 'Assbestova')
 
-print(best_student.grades)
-print(cool_reviewer)
+first_cool_reviewer.courses_attached += ['Python']
+
+#cool_reviewer.rate_hw(best_student, 'Python', 10)
+#cool_reviewer.rate_hw(best_student, 'Python', 10)
+#cool_reviewer.rate_hw(best_student, 'Python', 10)
+
+print(not_best_student)
+#print(cool_reviewer)
