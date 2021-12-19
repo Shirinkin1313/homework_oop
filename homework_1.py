@@ -3,16 +3,17 @@ class Student:
         self.name = name
         self.surname = surname
         self.gender = gender
-        self.finished_courses = []
+        self.finished_course = []
         self.courses_in_progress = []
         self.grades = {}
+        self.courses_attached = []
 
-    def rate_lec(self, lecture, course, grade):
-        if isinstance(lecture, Lecture) and course in self.courses_attached and course in lecture.courses_in_progress_lec:
-            if course in lecture.grades:
-                lecture.grades[course] += [grade]
+    def rate_lec(self, lecturer, course, grade):
+        if isinstance(lecturer, Lecturer) and course in self.courses_attached and course in lecturer.courses_in_progress_lec:
+            if course in lecturer.grades_st:
+                lecturer.grades_st[course] += [grade]
             else:
-                lecture.grades[course] = [grade]
+                lecturer.grades_st[course] = [grade]
         else:
             return 'Ошибка'
 
@@ -25,8 +26,9 @@ class Mentor:
         self.surname = surname
         self.courses_attached = []
 
-class Lecture(Mentor):
-    def __init__(self):
+class Lecturer(Mentor):
+    def __init__(self, name, surname):
+        super().__init__(name, surname)
         self.grades_st = {}
         self.courses_in_progress_lec = []
 
@@ -44,11 +46,12 @@ class Reviewer(Mentor):
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
 
-cool_mentor = Mentor('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
+cool_reviewer = Reviewer('Some', 'Buddy')
+cool_reviewer.courses_attached += ['Python']
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
+cool_reviewer.rate_hw(best_student, 'Python', 10)
+cool_reviewer.rate_hw(best_student, 'Python', 10)
+cool_reviewer.rate_hw(best_student, 'Python', 10)
 
 print(best_student.grades)
+print(cool_reviewer)
